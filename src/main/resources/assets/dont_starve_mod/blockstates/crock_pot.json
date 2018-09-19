@@ -1,0 +1,13 @@
+{
+    "variants": 
+    {
+        "burning=false,facing=north": { "model": "dont_starve_mod:crock_pot" },
+        "burning=false,facing=east": { "model": "dont_starve_mod:crock_pot", "y": 90 },
+        "burning=false,facing=south": { "model": "dont_starve_mod:crock_pot", "y": 180 },
+        "burning=false,facing=west": { "model": "dont_starve_mod:crock_pot", "y": 270 },
+        "burning=true,facing=north": { "model": "dont_starve_mod:crock_pot" },
+        "burning=true,facing=east": { "model": "dont_starve_mod:crock_pot", "y": 90 },
+        "burning=true,facing=south": { "model": "dont_starve_mod:crock_pot", "y": 180 },
+        "burning=true,facing=west": { "model": "dont_starve_mod:crock_pot", "y":270  }
+    }
+}

@@ -1,0 +1,16 @@
+[
+{
+  "modid": "dont_starve_mod",
+  "name": "Don't Starve Mod",
+  "description": "Adds some functions from Klei Entertainment's Don't Starve.",
+  "version": "1.0",
+  "mcversion": "1.12.2",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["neck"],
+  "credits": "neck, for creation. Klei Entertainment, for inspiration.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

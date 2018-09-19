@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "dont_starve_mod:blocks/block_test"
+    }
+}

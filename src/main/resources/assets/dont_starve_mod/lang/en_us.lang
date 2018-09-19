@@ -1,0 +1,16 @@
+// GUI
+itemGroup.dontstarvetab=Don't Starve Mod
+
+// Items
+item.walking_cane.name=Walking Cane
+item.eye_bone.name=Eye Bone
+
+//Blocks
+tile.block_test.name=Test Block
+tile.crock_pot.name=Crock Pot
+
+//Containers
+container.crock_pot=Crock Pot
+
+//Entities
+entity.chester.name=Chester

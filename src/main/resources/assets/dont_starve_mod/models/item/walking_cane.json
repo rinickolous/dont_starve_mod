@@ -1,0 +1,6 @@
+{
+   "parent": "item/handheld",
+   "textures": {
+       "layer0": "dont_starve_mod:items/walking_cane"
+   }
+}
