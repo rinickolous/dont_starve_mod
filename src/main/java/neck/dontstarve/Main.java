@@ -1,6 +1,5 @@
 package neck.dontstarve;
 
-import neck.dontstarve.hooks.PlayerTracker;
 import neck.dontstarve.init.EntityInit;
 import neck.dontstarve.proxy.CommonProxy;
 import neck.dontstarve.tabs.DontStarveCreativeTab;
@@ -34,7 +33,6 @@ public class Main
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
 		EntityInit.registerEntities();
 		RenderHandler.registerEntityRenders();
-		new PlayerTracker();
 	}
 	
 	@EventHandler

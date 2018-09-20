@@ -1,6 +1,7 @@
 package neck.dontstarve.gui;
 
 import neck.dontstarve.entity.EntityChester;
+import neck.dontstarve.entity.EnumChesterType;
 import neck.dontstarve.inventory.ContainerChester;
 import neck.dontstarve.util.Reference;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -56,7 +57,7 @@ public class GuiChester extends GuiContainer
 		int i = (this.width - this.xSize) / 2;
 		int j = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
-		if (this.chesterEntity.getType().equals("shadow"))
+		if (this.chesterEntity.getType() == EnumChesterType.SHADOW)
 		{
 			
 			this.drawTexturedModalRect(this.guiLeft + 133, this.guiTop + 17, 176, 0, 18, 54);

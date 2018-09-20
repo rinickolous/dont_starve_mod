@@ -3,6 +3,7 @@ package neck.dontstarve.inventory;
 import neck.dontstarve.capability.ChesterInventory;
 import neck.dontstarve.capability.ChesterInventoryCapability;
 import neck.dontstarve.entity.EntityChester;
+import neck.dontstarve.entity.EnumChesterType;
 import neck.dontstarve.inventory.slots.SlotChester;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -15,9 +16,8 @@ public class ContainerChester extends Container
 	
 	public ContainerChester(final EntityPlayer player, EntityChester chester)
 	{
-		System.out.println("BREAK_"+chester.getType());
 		ChesterInventory chesterInventory= (ChesterInventory)chester.getCapability(ChesterInventoryCapability.CAPABILITY, null);
-		if(chester.getType().equals("shadow")) this.invCollumns = 4;
+		if(chester.getType() == EnumChesterType.SHADOW) this.invCollumns = 4;
 		else this.invCollumns = 3;
 		for (int y = 0; y < 3; ++y)
 		{

@@ -13,14 +13,12 @@ public class ChesterInventory
 	private String type = "default";
 	private EntityChester instance;
 	
-	private float Health = 20.0F;
-	
 	public ChesterInventory()
 	{
 		int slotNum = 12;
 		this.inventory = new ChesterStackHandler(slotNum);
 	}
-	
+
 	public ItemStackHandler getInventoryHandler()
 	{
 		return this.inventory;
@@ -33,15 +31,7 @@ public class ChesterInventory
 	
 	public NBTBase writeData()
 	{
-		NBTTagCompound compound = this.inventory.serializeNBT();
-		
-		if ((getName() != null) && (getName().length() > 0))
-		{
-			compound.setString("customName", getName());
-		}
-		compound.setString("type", getType());
-		compound.setFloat("health", getHealth());
-		
+		NBTTagCompound compound = this.inventory.serializeNBT();		
 		return compound;
 	}
 	
@@ -49,51 +39,15 @@ public class ChesterInventory
 	{
 		NBTTagCompound compound = (NBTTagCompound)nbt;
 		this.inventory.deserializeNBT((NBTTagCompound)nbt);
-		if (compound.hasKey("customName"))
-		{
-			setName(compound.getString("customName"));
-		}
-		setType(compound.getString("type"));
-		setHealth(compound.getFloat("health"));
-	}
-	
-	public String getName()
-	{
-		return this.customName;
-	}
-	
-	public void setName(String name)
-	{
-		this.customName = name;
-	}
-	
-	public String getType()
-	{
-		return this.type;
-	}
-	
-	public void setType(String type)
-	{
-		this.type = type;
-	}
-	
-	public float getHealth()
-	{
-		return this.Health;
-	}
-	
-	public void setHealth(float health)
-	{
-		this.Health = health;
-	}
-	
-	public void setInstance(EntityChester chester)
-	{
-		this.instance = chester;
 	}
 	
 	public EntityChester getInstnace()
 	{
 		return this.instance;
+	}
+	
+	public ChesterStackHandler getInventory()
+	{
+		return this.inventory;
 	}
 }
