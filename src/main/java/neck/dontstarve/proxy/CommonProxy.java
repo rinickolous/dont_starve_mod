@@ -1,9 +1,11 @@
 package neck.dontstarve.proxy;
 
+import neck.dontstarve.item.ItemEyeBone;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class CommonProxy
 {
@@ -19,14 +21,8 @@ public class CommonProxy
     public void registerRenders() {
     }
     
-    public EntityPlayer getClientPlayer() {
-        return null;
-    }
-    
-    public void registerKey() {
-    }
-    
-    public ResourceLocation getFriendSkin() {
+    public EntityPlayer getClientPlayer()
+    {
         return null;
     }
 }

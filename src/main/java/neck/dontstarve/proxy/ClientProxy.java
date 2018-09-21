@@ -1,14 +1,14 @@
 package neck.dontstarve.proxy;
 
+import neck.dontstarve.init.ItemInit;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ClientProxy extends CommonProxy
 {
-	public static KeyBinding summonPet;
 	
 	@Override
 	public void registerItemRenderer(Item item, int meta, String id)

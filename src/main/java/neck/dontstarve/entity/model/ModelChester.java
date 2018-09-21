@@ -1,8 +1,12 @@
 package neck.dontstarve.entity.model;
 
+import neck.dontstarve.entity.EntityChester;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntityRabbit;
+import net.minecraft.util.math.MathHelper;
 
 /**
  * chester - neck
@@ -43,6 +47,7 @@ public class ModelChester extends ModelBase {
     public ModelRenderer horn_left_2;
     public ModelRenderer horn_right_2;
     public ModelRenderer tongue_2;
+    private float jumpRotation;
 
     public ModelChester() {
         this.textureWidth = 64;
@@ -223,5 +228,30 @@ public class ModelChester extends ModelBase {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
+    }
+    
+    @Override
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
+    {
+        float f = ageInTicks - (float)entityIn.ticksExisted;
+        EntityChester entity = (EntityChester)entityIn;
+        this.head.rotateAngleX = headPitch * 0.017453292F;
+        this.head.rotateAngleY = netHeadYaw * 0.017453292F;
+        this.jumpRotation = MathHelper.sin(entity.setJumpCompletion(f) * (float)Math.PI);
+//        System.out.println(this.jumpRotation);
+        this.leg_front_left_1.rotateAngleX = (this.jumpRotation * 45.0F - 60.0F) * 0.017453292F;
+        this.leg_front_right_1.rotateAngleX = (this.jumpRotation * 45.0F - 60.0F) * 0.017453292F;
+        this.leg_front_left_2.rotateAngleX = (this.jumpRotation * -30.0F + 60.0F) * 0.017453292F;
+        this.leg_front_right_2.rotateAngleX = (this.jumpRotation * -30.0F + 60.0F) * 0.017453292F;
+        this.leg_back_left_1.rotateAngleX = (this.jumpRotation * 45.0F - 60.0F) * 0.017453292F;
+        this.leg_back_right_1.rotateAngleX = (this.jumpRotation * 45.0F - 60.0F) * 0.017453292F;
+        this.leg_back_left_2.rotateAngleX = (this.jumpRotation * -30.0F + 60.0F) * 0.017453292F;
+        this.leg_back_right_2.rotateAngleX = (this.jumpRotation * -30.0F + 60.0F) * 0.017453292F;
+    }
+    
+    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)
+    {
+        super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
+//        this.jumpRotation = MathHelper.sin(((EntityChester)entitylivingbaseIn).setJumpCompletion(partialTickTime) * (float)Math.PI);
     }
 }

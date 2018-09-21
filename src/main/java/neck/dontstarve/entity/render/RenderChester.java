@@ -31,4 +31,10 @@ public class RenderChester extends RenderLiving<EntityChester>
 		else textures = TEXTURES_NORMAL;
 		return textures;
 	}
+	
+	@Override
+	protected void applyRotations(EntityChester entity, float rotationPitch, float rotationYaw, float partialTicks)
+	{
+		super.applyRotations(entity, rotationPitch, rotationYaw, partialTicks);
+	}
 }
