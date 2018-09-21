@@ -17,12 +17,4 @@ public class ChesterStackHandler extends ItemStackHandler
 	{
 		return this.stacks;
 	}
-	
-	public void clear()
-	{
-		for (ItemStack stack : this.getStacks())
-		{
-			stack = ItemStack.EMPTY;
-		}
-	}
 }

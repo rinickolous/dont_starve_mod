@@ -13,9 +13,12 @@ import net.minecraft.item.ItemStack;
 public class ContainerChester extends Container
 {
 	final int invCollumns;
+	private final EntityChester chestInventory;
 	
 	public ContainerChester(final EntityPlayer player, EntityChester chester)
 	{
+		this.chestInventory = chester;
+		
 		ChesterInventory chesterInventory= (ChesterInventory)chester.getCapability(ChesterInventoryCapability.CAPABILITY, null);
 		if(chester.getType() == EnumChesterType.SHADOW) this.invCollumns = 4;
 		else this.invCollumns = 3;
@@ -39,6 +42,11 @@ public class ContainerChester extends Container
         {
             this.addSlotToContainer(new Slot(player.inventory, k, 8 + k * 18, 142));
         }
+	}
+	
+	public EntityChester getChestInventory()
+	{
+		return this.chestInventory;
 	}
 	
 	public boolean canInteractWith(EntityPlayer playerIn)

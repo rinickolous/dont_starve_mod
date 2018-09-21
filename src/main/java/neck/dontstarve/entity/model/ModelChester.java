@@ -104,8 +104,8 @@ public class ModelChester extends ModelBase {
         this.leg_front_left_1.addBox(-2.0F, 0.0F, -2.0F, 4, 4, 4, 0.0F);
         this.setRotateAngle(leg_front_left_1, -0.5235987755982988F, -0.5235987755982988F, 0.0F);
         this.tongue_2 = new ModelRenderer(this, 0, 47);
-        this.tongue_2.setRotationPoint(0.0F, 0.3F, -2.4F);
-        this.tongue_2.addBox(-2.0F, 0.0F, -5.5F, 4, 1, 6, 0.0F);
+        this.tongue_2.setRotationPoint(0.0F, 0.3F, -4.4F);
+        this.tongue_2.addBox(-2.0F, -0.5F, -5.5F, 4, 1, 6, 0.0F);
         this.setRotateAngle(tongue_2, 0.296705972839036F, 0.0F, 0.0F);
         this.leg_back_right_2 = new ModelRenderer(this, 40, 8);
         this.leg_back_right_2.setRotationPoint(0.01F, 2.7F, -0.45F);
@@ -136,8 +136,8 @@ public class ModelChester extends ModelBase {
         this.tooth_lower_6.addBox(-1.0F, 0.3F, -0.5F, 2, 1, 1, 0.0F);
         this.setRotateAngle(tooth_lower_6, 0.0F, 1.7453292519943295F, 0.0F);
         this.tongue_1 = new ModelRenderer(this, 0, 42);
-        this.tongue_1.setRotationPoint(0.0F, -10.0F, 1.4F);
-        this.tongue_1.addBox(-2.5F, 0.0F, -2.0F, 5, 1, 4, 0.0F);
+        this.tongue_1.setRotationPoint(0.0F, -9.5F, 1.4F);
+        this.tongue_1.addBox(-2.5F, -0.5F, -4.0F, 5, 1, 4, 0.0F);
         this.setRotateAngle(tongue_1, -0.17453292519943295F, 0.0F, 0.0F);
         this.leg_front_right_2 = new ModelRenderer(this, 40, 8);
         this.leg_front_right_2.setRotationPoint(-0.01F, 2.7F, -0.45F);
@@ -217,7 +217,8 @@ public class ModelChester extends ModelBase {
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    {
         this.body.render(f5);
     }
 
@@ -233,12 +234,17 @@ public class ModelChester extends ModelBase {
     @Override
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
     {
+    	
         float f = ageInTicks - (float)entityIn.ticksExisted;
         EntityChester entity = (EntityChester)entityIn;
-        this.head.rotateAngleX = headPitch * 0.017453292F;
-        this.head.rotateAngleY = netHeadYaw * 0.017453292F;
+//        System.out.println(f);
+        this.head.rotateAngleX = (entity.lidAngle * -78.0F - 12.0F) * 0.017453292F;
+        
         this.jumpRotation = MathHelper.sin(entity.setJumpCompletion(f) * (float)Math.PI);
-//        System.out.println(this.jumpRotation);
+        
+        this.head.rotateAngleX = (this.jumpRotation * -6.0F - 12.0F) * 0.017453292F;
+        this.tongue_1.rotateAngleX = (this.jumpRotation * -10.0F - 10.0F) * 0.017453292F;
+        
         this.leg_front_left_1.rotateAngleX = (this.jumpRotation * 45.0F - 60.0F) * 0.017453292F;
         this.leg_front_right_1.rotateAngleX = (this.jumpRotation * 45.0F - 60.0F) * 0.017453292F;
         this.leg_front_left_2.rotateAngleX = (this.jumpRotation * -30.0F + 60.0F) * 0.017453292F;
