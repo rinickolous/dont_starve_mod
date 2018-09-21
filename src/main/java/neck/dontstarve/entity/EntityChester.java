@@ -120,11 +120,25 @@ public class EntityChester extends EntityTameable implements ICapabilitySerializ
 						stack.getTagCompound().setInteger("ChesterID", this.getEntityId());
 						player.sendMessage(new TextComponentString("Bound your Eye Bone to Chester."));
 					}
-					else if (this.checkUpgrade())
+					else if (stack.getTagCompound().getInteger("ChesterID") == this.getEntityId())
 					{
-						this.setType(EnumChesterType.values()[(byte) 2]);
-						this.clearInventory();
-						stack.getTagCompound().setByte("Type",(byte) this.getType().ordinal());
+						if (this.checkUpgrade())
+						{
+							this.startJumping();
+							this.world.playSound((EntityPlayer)null, (double)this.posX + 0.5D, (double)this.posY + 0.5D, (double)this.posZ + 0.5D, SoundEvents.BLOCK_ANVIL_USE, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
+							this.setType(EnumChesterType.values()[(byte) 2]);
+							this.clearInventory();
+							stack.getTagCompound().setByte("Type",(byte) this.getType().ordinal());
+						}
+						else
+						{
+							this.world.playSound((EntityPlayer)null, (double)this.posX + 0.5D, (double)this.posY + 0.5D, (double)this.posZ + 0.5D, SoundEvents.ENTITY_WOLF_PANT, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
+						}
+					}
+					else
+					{
+						player.sendMessage(new TextComponentString("This Eye Bone is already bound."));
+						this.world.playSound((EntityPlayer)null, (double)this.posX + 0.5D, (double)this.posY + 0.5D, (double)this.posZ + 0.5D, SoundEvents.BLOCK_ANVIL_FALL, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
 					}
 				}
 				else if (stack.getItem() instanceof ItemCane)
@@ -149,11 +163,12 @@ public class EntityChester extends EntityTameable implements ICapabilitySerializ
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
-//        System.out.println(this.getEntityData().getInteger("playersUsing"));
-        
-//        if (this.world.isRemote) System.out.println(this.lidAngle);
-        
-        System.out.println(this.isOpen);
+
+        if (this.getOwner() != null && this.getDistance(getOwner()) > 10)
+        {
+        	if (this.getDistance(getOwner()) > 40  && this.navigator.getPath() == null) this.setLocationAndAngles((double)(getOwner().posX + (world.rand.nextFloat()-0.5F) * 20.0F), getOwner().posY, (double)(getOwner().posZ + (world.rand.nextFloat()-0.5F) * 20.0F), 0.0F, 0.0F);
+        	else this.summon(getOwner());
+        }
         
         if (this.jumpTicks != this.jumpDuration)
         {
@@ -255,9 +270,9 @@ public class EntityChester extends EntityTameable implements ICapabilitySerializ
 	public void summon(EntityPlayer player)
 	{
 		EntityPlayer playerIn = this.getOwner();
-		playerIn.sendMessage(new TextComponentString("Summoning Chester to you..."));
+//		playerIn.sendMessage(new TextComponentString("Summoning Chester to you..."));
 		Vec3d aim = playerIn.getLookVec();
-		getNavigator().setPath(getNavigator().getPathToXYZ(playerIn.posX + aim.x * 1.8, playerIn.posY, playerIn.posZ + aim.z * 1.8), 0.5D);
+		getNavigator().setPath(getNavigator().getPathToXYZ(playerIn.posX + aim.x * 2.0, playerIn.posY, playerIn.posZ + aim.z * 2.0), 1.5D);
 	}
 	
 	/**
@@ -498,7 +513,7 @@ public class EntityChester extends EntityTameable implements ICapabilitySerializ
 	
     protected float getJumpUpwardsMotion()
     {
-        if (!this.collidedHorizontally && (!this.moveHelper.isUpdating() || this.moveHelper.getY() <= this.posY + 0.5D))
+        if (!this.collidedHorizontally && (!this.moveHelper.isUpdating() || this.moveHelper.getY() <= this.posY + 0.25D))
         {
             Path path = this.navigator.getPath();
 
@@ -506,13 +521,13 @@ public class EntityChester extends EntityTameable implements ICapabilitySerializ
             {
                 Vec3d vec3d = path.getPosition(this);
 
-                if (vec3d.y > this.posY + 0.5D)
+                if (vec3d.y > this.posY + 0.25D)
                 {
                     return 1.0F;
                 }
             }
 
-            return this.moveHelper.getSpeed() <= 0.6D ? 0.4F : 0.6F;
+            return this.moveHelper.getSpeed() <= 0.6D ? 0.2F : 0.3F;
         }
         else
         {

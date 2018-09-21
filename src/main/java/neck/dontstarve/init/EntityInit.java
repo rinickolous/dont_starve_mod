@@ -15,7 +15,7 @@ public class EntityInit
 {
 	public static void registerEntities()
 	{
-		registerEntity("chester", EntityChester.class, Reference.ENTITY_CHESTER, 50, 12284754, 5836305);
+		registerEntity("chester", EntityChester.class, Reference.ENTITY_CHESTER, 100, 12284754, 5836305);
 	}
 	
 	private static void registerEntity(String name, Class<? extends Entity> entity, int id, int range, int color1, int color2)
