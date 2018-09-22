@@ -2,5 +2,25 @@
    "parent": "item/handheld",
    "textures": {
        "layer0": "dont_starve_mod:items/eye_bone"
-   }
+   },
+    "overrides": [
+        {
+            "predicate": {
+                "type": 1
+            },
+            "model": "dont_starve_mod:item/eye_bone_snow"
+        },
+		{
+            "predicate": {
+                "type": 2
+            },
+            "model": "dont_starve_mod:item/eye_bone_shadow"
+        },
+		{
+            "predicate": {
+                "type": 3
+            },
+            "model": "dont_starve_mod:item/eye_bone_dead"
+        }
+    ]
 }

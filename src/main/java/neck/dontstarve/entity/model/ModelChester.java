@@ -238,9 +238,12 @@ public class ModelChester extends ModelBase {
     	
         float f = ageInTicks - (float)entityIn.ticksExisted;
         EntityChester entity = (EntityChester)entityIn;
-        this.head.rotateAngleX = (entity.lidAngle * 78.0F - 12.0F) * 0.017453292F;
+        
+        this.head.rotateAngleX = (Math.min(0, MathHelper.cos(entity.getLidAngle() * (float)Math.PI)) * 78.0F - 12.0F) * 0.017453292F;
 //        this.head.rotateAngleX = (Math.min(0.0f, MathHelper.cos(limbSwing) * limbSwingAmount) * 39.0F - 12.0F) * 0.017453292F;
         this.jumpRotation = MathHelper.sin(entity.setJumpCompletion(f) * (float)Math.PI);
+        
+//        System.out.println(entity.getLidAngle());
 
         
         this.leg_front_left_1.rotateAngleX = (this.jumpRotation * 45.0F - 60.0F) * 0.017453292F;
