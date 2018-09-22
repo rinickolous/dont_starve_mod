@@ -60,7 +60,7 @@ public class EntityChester extends EntityTameable implements ICapabilitySerializ
     private int currentMoveTypeDuration;
     
     public float lidAngle, prevLidAngle;
-//	private int numPlayersUsing;
+	private int numPlayersUsing;
 	private boolean isOpen;
     
     // Core
@@ -143,18 +143,18 @@ public class EntityChester extends EntityTameable implements ICapabilitySerializ
 				}
 				else if (stack.getItem() instanceof ItemCane)
 				{
-					this.isOpen = false;
+					--this.numPlayersUsing;
 				}
 				else
 				{
 					player.openGui(Main.instance, Reference.GUI_CHESTER, world, this.getEntityId(), (int)player.posY, (int)player.posZ);
-					this.isOpen = true;
+					++this.numPlayersUsing;
 				}
 			}
 			else
 			{
 				player.openGui(Main.instance, Reference.GUI_CHESTER, world, this.getEntityId(), (int)player.posY, (int)player.posZ);
-				this.isOpen = true;
+				++this.numPlayersUsing;
 			}
 		}
 		return true;
@@ -181,86 +181,66 @@ public class EntityChester extends EntityTameable implements ICapabilitySerializ
             this.setJumping(false);
         }
         
-        
-        if (this.isOpen && this.lidAngle < 1.0f)
+        if (this.numPlayersUsing != 0)
         {
-        	this.lidAngle += 0.1f;
+			
+            this.numPlayersUsing = 0;
+            float f = 5.0F;
+
+            for (EntityPlayer entityplayer : this.world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB((double)((float)this.posX - 5.0F), (double)((float)this.posY - 5.0F), (double)((float)this.posZ - 5.0F), (double)((float)(this.posX + 1) + 5.0F), (double)((float)(this.posY + 1) + 5.0F), (double)((float)(this.posZ + 1) + 5.0F))))
+            {
+                if (entityplayer.openContainer instanceof ContainerChester)
+                {
+                    if (((ContainerChester)entityplayer.openContainer).getChestInventory() == this)
+                    {
+                        ++this.numPlayersUsing;
+                    }
+                }
+            }
         }
-        
-        if (this.lidAngle > 1.0f)
+		
+		this.prevLidAngle = this.lidAngle;
+        float f1 = 0.2F;
+
+        if (this.numPlayersUsing > 0 && this.lidAngle == 0.0F)
         {
-        	this.lidAngle = 1.0f;
+            double d1 = (double)this.posX + 0.5D;
+            double d2 = (double)this.posZ + 0.5D;
+            this.world.playSound((EntityPlayer)null, d1, (double)this.posY + 0.5D, d2, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
         }
-        
-        if (!this.isOpen && this.lidAngle > 0.0f)
+
+        if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F)
         {
-        	this.lidAngle -= 0.1f;
-        }
-        
-        if (this.lidAngle < 0.0f)
-        {
-        	this.lidAngle = 0.0f;
-        }
-        
-//		if (!this.world.isRemote && this.numPlayersUsing != 0)
-//        {
-//            this.numPlayersUsing = 0;
-//            float f = 5.0F;
-//
-//            for (EntityPlayer entityplayer : this.world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB((double)((float)this.posX - 5.0F), (double)((float)this.posY - 5.0F), (double)((float)this.posZ - 5.0F), (double)((float)(this.posX + 1) + 5.0F), (double)((float)(this.posY + 1) + 5.0F), (double)((float)(this.posZ + 1) + 5.0F))))
-//            {
-//                if (entityplayer.openContainer instanceof ContainerChester)
-//                {
-//                    if (((ContainerChester)entityplayer.openContainer).getChestInventory() == this)
-//                    {
-//                        ++this.numPlayersUsing;
-//                    }
-//                }
-//            }
-//        }
-//		
-//		this.prevLidAngle = this.lidAngle;
-//        float f1 = 0.1F;
-//
-//        if (this.numPlayersUsing > 0 && this.lidAngle == 0.0F)
-//        {
-//            double d1 = (double)this.posX + 0.5D;
-//            double d2 = (double)this.posZ + 0.5D;
-//            this.world.playSound((EntityPlayer)null, d1, (double)this.posY + 0.5D, d2, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
-//        }
-//
-//        if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F)
-//        {
-//            float f2 = this.lidAngle;
-//
-//            if (this.numPlayersUsing > 0)
-//            {
-//                this.lidAngle += 0.1F;
-//            }
-//            else
-//            {
-//                this.lidAngle -= 0.1F;
-//            }
-//
-//            if (this.lidAngle > 1.0F)
-//            {
-//                this.lidAngle = 1.0F;
-//            }
-//
-//            float f3 = 0.5F;
-//
-//            if (this.lidAngle < 0.5F && f2 >= 0.5F)
-//            {
-//                double d3 = (double)this.posX + 0.5D;
-//                double d0 = (double)this.posZ + 0.5D;
-//                this.world.playSound((EntityPlayer)null, d3, (double)this.posY + 0.5D, d0, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
-//            }
-//
-//            if (this.lidAngle < 0.0F)
-//            {
-//                this.lidAngle = 0.0F;
-//            }
-//        }		
+            float f2 = this.lidAngle;
+
+            if (this.numPlayersUsing > 0)
+            {
+                this.lidAngle += f1;
+            }
+            else
+            {
+                this.lidAngle -= f1;
+            }
+
+            if (this.lidAngle > 1.0F)
+            {
+                this.lidAngle = 1.0F;
+            }
+
+            float f3 = 0.5F;
+
+            if (this.lidAngle < 0.5F && f2 >= 0.5F)
+            {
+                double d3 = (double)this.posX + 0.5D;
+                double d0 = (double)this.posZ + 0.5D;
+                this.world.playSound((EntityPlayer)null, d3, (double)this.posY + 0.5D, d0, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
+            }
+
+            if (this.lidAngle < 0.0F)
+            {
+                this.lidAngle = 0.0F;
+            }
+        }		
     }
 
 	/**

@@ -136,7 +136,7 @@ public class ModelChester extends ModelBase {
         this.tooth_lower_6.addBox(-1.0F, 0.3F, -0.5F, 2, 1, 1, 0.0F);
         this.setRotateAngle(tooth_lower_6, 0.0F, 1.7453292519943295F, 0.0F);
         this.tongue_1 = new ModelRenderer(this, 0, 42);
-        this.tongue_1.setRotationPoint(0.0F, -9.5F, 1.4F);
+        this.tongue_1.setRotationPoint(0.0F, -9.5F, 3.4F);
         this.tongue_1.addBox(-2.5F, -0.5F, -4.0F, 5, 1, 4, 0.0F);
         this.setRotateAngle(tongue_1, -0.17453292519943295F, 0.0F, 0.0F);
         this.leg_front_right_2 = new ModelRenderer(this, 40, 8);
@@ -219,6 +219,7 @@ public class ModelChester extends ModelBase {
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
+//    	this.head.render(f5);
         this.body.render(f5);
     }
 
@@ -237,13 +238,10 @@ public class ModelChester extends ModelBase {
     	
         float f = ageInTicks - (float)entityIn.ticksExisted;
         EntityChester entity = (EntityChester)entityIn;
-//        System.out.println(f);
-        this.head.rotateAngleX = (entity.lidAngle * -78.0F - 12.0F) * 0.017453292F;
-        
+        this.head.rotateAngleX = (entity.lidAngle * 78.0F - 12.0F) * 0.017453292F;
+//        this.head.rotateAngleX = (Math.min(0.0f, MathHelper.cos(limbSwing) * limbSwingAmount) * 39.0F - 12.0F) * 0.017453292F;
         this.jumpRotation = MathHelper.sin(entity.setJumpCompletion(f) * (float)Math.PI);
-        
-        this.head.rotateAngleX = (this.jumpRotation * -6.0F - 12.0F) * 0.017453292F;
-        this.tongue_1.rotateAngleX = (this.jumpRotation * -10.0F - 10.0F) * 0.017453292F;
+
         
         this.leg_front_left_1.rotateAngleX = (this.jumpRotation * 45.0F - 60.0F) * 0.017453292F;
         this.leg_front_right_1.rotateAngleX = (this.jumpRotation * 45.0F - 60.0F) * 0.017453292F;
