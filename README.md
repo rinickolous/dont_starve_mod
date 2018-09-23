@@ -10,7 +10,10 @@ WIP Minecraft 1.12.2 mod, aiming to add functionality from the game Don't Starve
   - Food spoilage over time
   - Tallbird (large hostile mob)
   - Touchstone (allows players on multiplayer hardcore servers to respawn)
-  - Various staves and other items from Don't Starve...
+  - Sanity System
+  - Darkness as a threat in and of itself
+  - Dynamic lighting
+  - Custom world type and biomes
   
   ## Screenshots
    - Chester variations
