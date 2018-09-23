@@ -1,7 +1,6 @@
 package neck.dontstarve.inventory;
 
 import neck.dontstarve.capability.ChesterInventory;
-import neck.dontstarve.capability.ChesterInventoryCapability;
 import neck.dontstarve.entity.EntityChester;
 import neck.dontstarve.entity.EnumChesterType;
 import neck.dontstarve.inventory.slots.SlotChester;
@@ -19,7 +18,7 @@ public class ContainerChester extends Container
 	{
 		this.chestInventory = chester;
 		
-		ChesterInventory chesterInventory= (ChesterInventory)chester.getCapability(ChesterInventoryCapability.CAPABILITY, null);
+		ChesterInventory chesterInventory= (ChesterInventory)chester.getCapability(EntityChester.CAPABILITY, null);
 		if(chester.getType() == EnumChesterType.SHADOW) this.invCollumns = 4;
 		else this.invCollumns = 3;
 		for (int y = 0; y < 3; ++y)

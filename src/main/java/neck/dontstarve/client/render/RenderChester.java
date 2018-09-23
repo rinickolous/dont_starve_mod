@@ -1,12 +1,9 @@
-package neck.dontstarve.entity.render;
+package neck.dontstarve.client.render;
 
-import javax.swing.text.html.parser.Entity;
-
+import neck.dontstarve.client.model.ModelChester;
 import neck.dontstarve.entity.EntityChester;
-import neck.dontstarve.entity.model.ModelChester;
-import neck.dontstarve.util.Reference;
 import neck.dontstarve.entity.EnumChesterType;
-
+import neck.dontstarve.util.Reference;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

@@ -1,4 +1,4 @@
-package neck.dontstarve.entity.model;
+package neck.dontstarve.client.model;
 
 import neck.dontstarve.entity.EntityChester;
 import net.minecraft.client.model.ModelBase;

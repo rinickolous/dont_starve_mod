@@ -1,7 +1,7 @@
 package neck.dontstarve.util.handlers;
 
+import neck.dontstarve.client.render.RenderChester;
 import neck.dontstarve.entity.EntityChester;
-import neck.dontstarve.entity.render.RenderChester;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraftforge.fml.client.registry.IRenderFactory;

@@ -6,7 +6,6 @@ import javax.annotation.Nullable;
 
 import neck.dontstarve.Main;
 import neck.dontstarve.capability.ChesterInventory;
-import neck.dontstarve.capability.ChesterInventoryCapability;
 import neck.dontstarve.init.ItemInit;
 import neck.dontstarve.inventory.ContainerChester;
 import neck.dontstarve.item.ItemCane;
@@ -30,7 +29,6 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.Path;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.management.PreYggdrasilConverter;
 import net.minecraft.util.DamageSource;
@@ -48,6 +46,7 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 
 public class EntityChester extends EntityTameable implements ICapabilitySerializable<NBTTagCompound>
 {
@@ -403,7 +402,7 @@ public class EntityChester extends EntityTameable implements ICapabilitySerializ
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
 	{
-		if (capability == ChesterInventoryCapability.CAPABILITY)
+		if (capability == this.CAPABILITY)
 		{
 			return true;
 		}
@@ -413,7 +412,7 @@ public class EntityChester extends EntityTameable implements ICapabilitySerializ
 	@Override
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
 	{
-		if (capability == ChesterInventoryCapability.CAPABILITY)
+		if (capability == this.CAPABILITY)
 		{
 			return (T) this.chesterInv;
 		}
@@ -453,13 +452,13 @@ public class EntityChester extends EntityTameable implements ICapabilitySerializ
 	@Override
 	public NBTTagCompound serializeNBT()
 	{
-		return (NBTTagCompound)ChesterInventoryCapability.CAPABILITY.writeNBT(this.chesterInv, null);
+		return (NBTTagCompound)this.CAPABILITY.writeNBT(this.chesterInv, null);
 	}
 
 	@Override
 	public void deserializeNBT(NBTTagCompound nbt)
 	{
-		ChesterInventoryCapability.CAPABILITY.readNBT(this.chesterInv, null, nbt);
+		this.CAPABILITY.readNBT(this.chesterInv, null, nbt);
 	}
 	
 	@Override
